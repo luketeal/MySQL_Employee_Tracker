@@ -1,0 +1,23 @@
+{
+  "name": "mysql_employee_tracker",
+  "version": "1.0.0",
+  "description": "Tracks employees roles and departments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luketeal/MySQL_Employee_Tracker.git"
+  },
+  "author": "Luke Teal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luketeal/MySQL_Employee_Tracker/issues"
+  },
+  "homepage": "https://github.com/luketeal/MySQL_Employee_Tracker#readme",
+  "dependencies": {
+    "inquirer": "^8.1.0",
+    "mysql": "^2.18.1"
+  }
+}
