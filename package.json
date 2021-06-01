@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/luketeal/MySQL_Employee_Tracker#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "inquirer": "^8.1.0",
     "mysql": "^2.18.1"
   }
