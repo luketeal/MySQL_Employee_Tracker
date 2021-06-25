@@ -41,7 +41,7 @@ function runEmployeeTracker() {
     }).then((answer) => {
         switch (answer.action) {
             case 'Add department':
-                // addDepartment();
+                addDepartment();
                 break;
 
             case 'Add role':
@@ -96,6 +96,27 @@ function runEmployeeTracker() {
 }
 
 //  TODO: Add department
+
+const addDepartment = () => {
+    inquirer.prompt({
+        name: 'department',
+        type: 'input',
+        message: 'What department would you like to add?'
+    }).then((answer) => {
+        connection.query(
+            'INSERT INTO departments SET ?',
+            {
+                DeptName: answer.department
+            },
+            (err, res) => {
+                if (err) throw err;
+                console.log(`department inserted!\n`);
+                runEmployeeTracker();
+            }
+        )
+    })
+}
+
 //  TODO: Add role 
 //  TODO: Add employee
 //  TODO: View department
