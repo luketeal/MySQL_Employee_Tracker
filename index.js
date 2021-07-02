@@ -53,7 +53,7 @@ function runEmployeeTracker() {
                 break;
 
             case 'View departments':
-                // viewDepartment();
+                viewDepartments();
                 break;
 
             case 'View roles':
@@ -241,16 +241,18 @@ const addEmployee = () => {
             )
         }
     )
-
-
-
-      
-
 }
 
 //  TODO: View department
-//  TODO: View role
-//  TODO: View employee
+
+const viewDepartments = () => {
+    connection.query('SELECT * FROM Departments', (err, res) => {
+        if(err) throw err;
+        console.table(res,['DeptName'])
+    })}
+
+//  TODO: View roles
+//  TODO: View employees
 //  TODO: View total department budget
 //  TODO: Update Employee
 //  TODO: Update Empoyee manager
