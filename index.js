@@ -264,10 +264,16 @@ const viewRoles = () => {
 
 //  TODO: View employees
 const viewEmployees = () => {
-    connection.query(`SELECT CONCAT(e.FirstName, ' ', e.LastName) AS Employee, Title, Salary, CONCAT(m.FirstName, ' ', m.LastName) AS Manager FROM Employees e JOIN Employees m ON m.EmployeeID = e.ManagerID JOIN Roles ON Roles.RoleID = e.EmployeeID`, (err, res) => {
-        if(err) throw err;
-        console.table(res)
-        runEmployeeTracker();
+    connection.query(
+        `SELECT CONCAT(e.FirstName, ' ', e.LastName) AS Employee, Title, Salary, DeptName, CONCAT(m.FirstName, ' ', m.LastName) AS Manager 
+        FROM Employees AS e 
+        JOIN Employees AS m ON m.EmployeeID = e.ManagerID 
+        JOIN Roles ON Roles.RoleID = e.EmployeeID
+        JOIN Departments ON Roles.DepartmentID = Departments.DepartmentID`, 
+        (err, res) => {
+            if(err) throw err;
+            console.table(res)
+            runEmployeeTracker();
 })}
 
 // SELECT e.FirstName, e.LastName, Roles.Title, Roles.Salary, m.FirstName, m.LastName
