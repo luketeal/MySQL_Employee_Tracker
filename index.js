@@ -57,7 +57,7 @@ function runEmployeeTracker() {
                 break;
 
             case 'View roles':
-                // viewRole();
+                viewRoles();
                 break;
 
             case 'View employees':
@@ -246,12 +246,21 @@ const addEmployee = () => {
 //  TODO: View department
 
 const viewDepartments = () => {
-    connection.query('SELECT * FROM Departments', (err, res) => {
+    connection.query('SELECT DeptName FROM Departments', (err, res) => {
         if(err) throw err;
-        console.table(res,['DeptName'])
+        console.table(res)
+        runEmployeeTracker();
     })}
 
 //  TODO: View roles
+
+const viewRoles = () => {
+    connection.query('SELECT Title, Salary FROM Roles LEFT JOIN Departments ON Roles.DepartmentID = Departments.DepartmentID', (err, res) => {
+        if(err) throw err;
+        console.table(res)
+        runEmployeeTracker();
+})}
+
 //  TODO: View employees
 //  TODO: View total department budget
 //  TODO: Update Employee
