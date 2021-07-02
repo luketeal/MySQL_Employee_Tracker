@@ -61,7 +61,7 @@ function runEmployeeTracker() {
                 break;
 
             case 'View employees':
-                // viewEmployee();
+                viewEmployees();
                 break;
 
             case 'View department budget':
@@ -255,13 +255,25 @@ const viewDepartments = () => {
 //  TODO: View roles
 
 const viewRoles = () => {
-    connection.query('SELECT Title, Salary, DeptName AS Department FROM Roles LEFT JOIN Departments ON Roles.DepartmentID = Departments.DepartmentID', (err, res) => {
+    connection.query(`SELECT Title, Salary, DeptName AS Department 
+    FROM Roles LEFT JOIN Departments ON Roles.DepartmentID = Departments.DepartmentID`, (err, res) => {
         if(err) throw err;
         console.table(res)
         runEmployeeTracker();
 })}
 
 //  TODO: View employees
+const viewEmployees = () => {
+    connection.query(`SELECT CONCAT(e.FirstName, ' ', e.LastName) AS Employee, Title, Salary, CONCAT(m.FirstName, ' ', m.LastName) AS Manager FROM Employees e JOIN Employees m ON m.EmployeeID = e.ManagerID JOIN Roles ON Roles.RoleID = e.EmployeeID`, (err, res) => {
+        if(err) throw err;
+        console.table(res)
+        runEmployeeTracker();
+})}
+
+// SELECT e.FirstName, e.LastName, Roles.Title, Roles.Salary, m.FirstName, m.LastName
+//     FROM Employees e 
+//     LEFT JOIN Roles ON e.RoleID = Roles.RoleID 
+//     JOIN Employees m ON e.ManagerID = m.EmployeeID
 //  TODO: View total department budget
 //  TODO: Update Employee
 //  TODO: Update Empoyee manager

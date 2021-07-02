@@ -13,7 +13,7 @@ VALUES
     ("President",300000,2),
     ("HR Rep",40000,2);
 
-INSERT INTO Employees (FirstName, LastName, RoleID, ManagerID)
+INSERT INTO Employees (FirstName, LastName, RoleID)
 VALUES 
     ("Anna","Teal",1),
     ("John","Doe",2),
@@ -25,7 +25,7 @@ VALUES
 
 UPDATE Employees
 SET ManagerID=6
-WHERE RoleID=1 OR RoleID=3 OR RoleID=5;
+WHERE RoleID=1 OR RoleID=3 OR RoleID=5 OR RoleID=6;
 
 UPDATE Employees
 SET ManagerID=1
