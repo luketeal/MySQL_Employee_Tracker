@@ -246,7 +246,7 @@ const addEmployee = () => {
 //  TODO: View department
 
 const viewDepartments = () => {
-    connection.query('SELECT DeptName FROM Departments', (err, res) => {
+    connection.query('SELECT DeptName AS Department FROM Departments', (err, res) => {
         if(err) throw err;
         console.table(res)
         runEmployeeTracker();
@@ -255,7 +255,7 @@ const viewDepartments = () => {
 //  TODO: View roles
 
 const viewRoles = () => {
-    connection.query('SELECT Title, Salary FROM Roles LEFT JOIN Departments ON Roles.DepartmentID = Departments.DepartmentID', (err, res) => {
+    connection.query('SELECT Title, Salary, DeptName AS Department FROM Roles LEFT JOIN Departments ON Roles.DepartmentID = Departments.DepartmentID', (err, res) => {
         if(err) throw err;
         console.table(res)
         runEmployeeTracker();
