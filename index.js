@@ -45,7 +45,7 @@ function runEmployeeTracker() {
                 break;
 
             case 'Add role':
-                // addRole();
+                addRole();
                 break;
 
             case 'Add employee':
@@ -118,6 +118,56 @@ const addDepartment = () => {
 }
 
 //  TODO: Add role 
+const addRole = () => {
+    connection.query(
+        'SELECT * FROM departments', (err, res) => {
+            if (err) throw err;
+            inquirer.prompt([
+                {
+                    name: 'role',
+                    type: 'input',
+                    message: 'What role would you like to add?'
+                },
+                {
+                    name: 'salary',
+                    type: 'number',
+                    message: `What's this role's Salary (USD)?'`
+                },
+                {
+                    name: 'department',
+                    type: 'rawlist',
+                    choices() {
+                        const choiceArray = [];
+                        res.forEach(({ DeptName }) => {
+                          choiceArray.push(DeptName);
+                        });
+                        return choiceArray;
+                      },
+                    message: 'What department is the role under?',
+                }
+            ]).then((answer) => {
+                let chosenDept;
+                res.forEach((department)=> {
+                    if(department.DeptName === answer.department) {
+                        chosenDept = department
+                    }
+                })
+                connection.query(
+                    'INSERT INTO roles SET ?',
+                    {
+                        Title: answer.role,
+                        Salary: answer.salary,
+                        DepartmentID: chosenDept.DepartmentID
+                    }, (err, res) => {
+                        if (err) throw err;
+                        console.log(`role inserted!\n`);
+                        runEmployeeTracker();
+                    }            
+                )
+            }
+        )          
+    })
+}
 //  TODO: Add employee
 //  TODO: View department
 //  TODO: View role
