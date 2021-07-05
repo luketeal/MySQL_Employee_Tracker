@@ -30,12 +30,8 @@ function runEmployeeTracker() {
             'View departments',
             'View roles',
             'View employees',
-            'View department budget',
             'Update employee',
-            'Update employee manager',
-            'Delete department',
-            'Delete role',
-            'Delete employee',
+            'Close'
         ],
     }).then((answer) => {
         switch (answer.action) {
@@ -63,9 +59,12 @@ function runEmployeeTracker() {
                 viewEmployees();
                 break;
 
-
             case 'Update employee':
                 updateEmployee();
+                break;  
+
+            case 'Close':
+                connection.end()
                 break;  
 
             default:
@@ -101,6 +100,11 @@ const addRole = () => {
     connection.query(
         'SELECT * FROM departments', (err, res) => {
             if (err) throw err;
+            if(res.length === 0) {
+                console.log('Please first create a dapartment')
+                runEmployeeTracker();
+                return
+            } else {
             inquirer.prompt([
                 {
                     name: 'role',
@@ -145,7 +149,7 @@ const addRole = () => {
                 )
             }
         )          
-    })
+    }})
 }
 //  Add employee
 const addEmployee = () => {
@@ -154,6 +158,11 @@ const addEmployee = () => {
     connection.query(
         'SELECT * FROM Roles', (err, resRoles) => {
             if (err) throw err;
+            if(resRoles.length === 0) {
+                console.log('Please first add a role')
+                runEmployeeTracker();
+                return
+            } else {
             resRoles.forEach(({Title}) => {
                 rolesArray.push(Title)
             })
@@ -164,6 +173,7 @@ const addEmployee = () => {
                     resEmployees.forEach(({FirstName, LastName}) => {
                         employeesArray.push(`${FirstName} ${LastName}`)
                     })
+                    console.log(employeesArray.length)
 
                     inquirer.prompt([
                         {
@@ -187,6 +197,13 @@ const addEmployee = () => {
                             type: 'rawlist',
                             choices: employeesArray,
                             meassage: 'Who is this employees manager?',
+                            when: (responses) => {
+                                if(employeesArray.length !== 0) {
+                                return true
+                                } else {
+                                    return false
+                                }
+                            }
                         }
                 
                     ]).then((answer) => {
@@ -202,24 +219,40 @@ const addEmployee = () => {
                                 chosenManager = manager
                             }
                         })
-                        connection.query(
-                            'INSERT INTO Employees SET ?',
-                            {
-                                FirstName: answer.firstName,
-                                LastName: answer.lastName,
-                                RoleID: chosenRole.RoleID,
-                                ManagerID: chosenManager.EmployeeID
-                            }, (err, res) => {
-                                if (err) throw err;
-                                console.log(`Employee inserted!\n`);
-                                runEmployeeTracker();
-                            }            
-                        )
+                        if(employeesArray.length !== 0) {
+                            connection.query(
+                                'INSERT INTO Employees SET ?',
+                                {
+                                    FirstName: answer.firstName,
+                                    LastName: answer.lastName,
+                                    RoleID: chosenRole.RoleID,
+                                    ManagerID: chosenManager.EmployeeID
+                                }, (err, res) => {
+                                    if (err) throw err;
+                                    console.log(`Employee inserted!\n`);
+                                    runEmployeeTracker();
+                                }            
+                            )
+                        } else {
+                            connection.query(
+                                'INSERT INTO Employees SET ?',
+                                {
+                                    FirstName: answer.firstName,
+                                    LastName: answer.lastName,
+                                    RoleID: chosenRole.RoleID,
+                                }, (err, res) => {
+                                    if (err) throw err;
+                                    console.log(`Employee inserted!\n`);
+                                    runEmployeeTracker();
+                                }            
+                            )
+                        }
+                        
                     }
                 )
                 }
             )
-        }
+        }}
     )
 }
 
