@@ -265,7 +265,7 @@ const viewRoles = () => {
 //  TODO: View employees
 const viewEmployees = () => {
     connection.query(
-        `SELECT CONCAT(e.FirstName, ' ', e.LastName) AS Employee, Title, Salary, DeptName, CONCAT(m.FirstName, ' ', m.LastName) AS Manager 
+        `SELECT CONCAT(e.FirstName, ' ', e.LastName) AS Employee, Title AS Role, Salary, DeptName AS Department, CONCAT(m.FirstName, ' ', m.LastName) AS Manager 
         FROM Employees AS e 
         JOIN Employees AS m ON m.EmployeeID = e.ManagerID 
         JOIN Roles ON Roles.RoleID = e.EmployeeID
@@ -276,12 +276,11 @@ const viewEmployees = () => {
             runEmployeeTracker();
 })}
 
-// SELECT e.FirstName, e.LastName, Roles.Title, Roles.Salary, m.FirstName, m.LastName
-//     FROM Employees e 
-//     LEFT JOIN Roles ON e.RoleID = Roles.RoleID 
-//     JOIN Employees m ON e.ManagerID = m.EmployeeID
-//  TODO: View total department budget
 //  TODO: Update Employee
+
+
+//  TODO: View total department budget
+
 //  TODO: Update Empoyee manager
 //  TODO: Delete department
 //  TODO: Delete role
