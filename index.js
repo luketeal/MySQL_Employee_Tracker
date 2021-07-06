@@ -339,7 +339,6 @@ const updateEmployee = () => {
                                 chosenRole = role
                             }
                         })
-                        console.log(chosenRole)
                         let chosenManager;
                         resEmployees.forEach((manager)=> {
                             if(`${manager.FirstName} ${manager.LastName}` === answer.manager) {
