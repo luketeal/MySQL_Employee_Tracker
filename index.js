@@ -172,8 +172,7 @@ const addEmployee = () => {
                     if (err) throw err;
                     resEmployees.forEach(({FirstName, LastName}) => {
                         employeesArray.push(`${FirstName} ${LastName}`)
-                    })
-                    console.log(employeesArray.length)
+                    })                    
 
                     inquirer.prompt([
                         {
