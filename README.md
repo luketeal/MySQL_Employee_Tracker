@@ -21,7 +21,7 @@ This is a nodejs command line employee tracker application that allows users to 
 Be sure to update your .env file with your password.  An example file is provided.
 
 ## Usage 
-Checkout this for [demo](https://youtu.be/cCyc2L8UeCw) of the intended functionality.
+Checkout this [demo](https://youtu.be/cCyc2L8UeCw) of the intended functionality for intended usage.
 
 ## Repo-Contents
 * [Database schema and seeds](db/)
