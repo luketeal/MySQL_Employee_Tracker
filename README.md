@@ -11,7 +11,6 @@ This is a nodejs command line employee tracker application that allows users to 
 * [License](#License)  
 * [Contributing](#Contributing)   
 * [Questions](#Questions)
-* [Credits](#Credits)  
 
 ## Installation
 1. Run `npm install` to install dependencies.
@@ -47,6 +46,3 @@ If you have any questions, contact me:
 Email: l.teal21@gmail.com
 
 [GitHub Profile](https://github.com/luketeal)
-
-## Credits
-* Starter files were provided by Trilogy Education Services, LLC, a 2U, Inc. brand
