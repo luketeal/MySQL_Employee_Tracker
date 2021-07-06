@@ -26,7 +26,7 @@ Checkout this for [demo](https://youtu.be/cCyc2L8UeCw) of the intended functiona
 
 ## Repo-Contents
 * [Database schema and seeds](db/)
-* Example env file
+* [Example env file](.env.EXAMPLE)
 * [index.js file](index.js)
 
 ## Future Development
